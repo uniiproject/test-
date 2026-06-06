@@ -14,49 +14,16 @@ body{
   justify-content:center;
   align-items:center;
   overflow:hidden;
-  background: linear-gradient(135deg,#f7e6ff,#ffe6f2);
+
+  /* 🌸 بک‌گراند گل‌دار ثابت */
+  background-color:#fbe7ff;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg%3E%3Ccircle cx='40' cy='40' r='6' fill='%23ff2fa0'/%3E%3Ccircle cx='40' cy='20' r='8' fill='%23ff7ac8'/%3E%3Ccircle cx='60' cy='40' r='8' fill='%23ff4fa3'/%3E%3Ccircle cx='40' cy='60' r='8' fill='%23ff7ac8'/%3E%3Ccircle cx='20' cy='40' r='8' fill='%23ff4fa3'/%3E%3C/g%3E%3C/svg%3E");
+
+  background-size:80px 80px;
 }
 
-/* 🌸 گل‌های انیمیشنی */
-.flowers{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-  overflow:hidden;
-}
-
-.flower{
-  position:absolute;
-  width:40px;
-  height:40px;
-  background: radial-gradient(circle, #ff9ecb 20%, #ff6fae 60%, transparent 70%);
-  border-radius:50%;
-  opacity:0.6;
-  animation: float 14s infinite linear;
-}
-
-@keyframes float{
-  0%{
-    transform: translateY(100vh) scale(0.6) rotate(0deg);
-    opacity:0;
-  }
-  20%{opacity:0.8;}
-  100%{
-    transform: translateY(-10vh) scale(1.2) rotate(360deg);
-    opacity:0;
-  }
-}
-
-.f1{ left:10%; animation-duration:14s; }
-.f2{ left:25%; animation-duration:11s; width:30px; height:30px; }
-.f3{ left:50%; animation-duration:16s; width:45px; height:45px; }
-.f4{ left:70%; animation-duration:13s; }
-.f5{ left:85%; animation-duration:18s; width:35px; height:35px; }
-
-/* 🌸 کارت اصلی */
+/* کارت */
 .box{
   width:90%;
   max-width:750px;
@@ -65,10 +32,8 @@ body{
   border-radius:15px;
   box-shadow:0 10px 30px rgba(0,0,0,.1);
   position:relative;
-  z-index:2;
 }
 
-/* دکمه */
 .btn{
   background:#b388ff;
   color:#fff;
@@ -76,10 +41,8 @@ body{
   padding:12px 18px;
   border-radius:10px;
   cursor:pointer;
-  margin-top:15px;
 }
 
-/* گزینه‌ها */
 .option{
   display:block;
   margin:10px 0;
@@ -92,174 +55,21 @@ body{
 
 <body>
 
-<!-- 🌸 گل‌ها -->
-<div class="flowers">
-  <div class="flower f1"></div>
-  <div class="flower f2"></div>
-  <div class="flower f3"></div>
-  <div class="flower f4"></div>
-  <div class="flower f5"></div>
-</div>
-
 <div class="box">
   <div id="app"></div>
 </div>
 
 <script>
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9kjcA-k_lNqYOAxEVrm3mbfXfM6i_2pIA5NpanLUWpnZOzbWlji23zDU4c8k5-iFg/exec";
+const app=document.getElementById("app");
 
-/* ---------- INTRO (FULL TEXT FIXED) ---------- */
-const introText = `
-شرکت‌کننده گرامی،
-
-این پرسشنامه صرفاً در چارچوب یک پژوهش دانشگاهی تهیه شده است. تمامی اطلاعات و پاسخ‌های ارائه‌شده توسط شما کاملاً محرمانه تلقی شده و فقط برای اهداف علمی و پژوهشی مورد استفاده قرار خواهد گرفت. همچنین هیچ‌یک از اطلاعات فردی یا نتایج پاسخ‌ها در اختیار اشخاص یا نهادهای دیگر قرار نخواهد گرفت و از انتشار آن‌ها به هر شکل جلوگیری خواهد شد.
-
-از اینکه با صرف وقت و دقت خود در این پژوهش مشارکت می‌کنید، صمیمانه سپاسگزاریم. همکاری ارزشمند شما نقش مهمی در پیشبرد این تحقیق خواهد داشت.
+app.innerHTML=`
+  <h2>فرم آماده است</h2>
+  <p>این نسخه فقط بک‌گراند گل‌دار ثابت دارد.</p>
+  <button class="btn">شروع</button>
 `;
 
-/* ---------- QUESTIONS ---------- */
-const questions = [
-"احساس میکنم که به خاطر فعالیت های مربوط به تحصیل تهی شده‌ام.",
-"در پایان روز در دانشگاه احساس بی رمقی میکنم.",
-"وقتی صبح بیدار میشوم و مجبورم روز دیگری در دانشگاه سپری کنم احساس خستگی میکنم.",
-"با مطالعه یا حضور در کلاس به من فشار می‌آید.",
-"به خاطر انجام فعالیت های مربوط به تحصیل احساس فرسودگی میکنم.",
-"از زمان قبولی و ثبت نام در دانشگاه نسبت به دروسم کم علاقه شده‌ام.",
-"نسبت به دروسم شور و شوق کمتری دارم.",
-"نسبت به اهمیت دروسم تردید دارم.",
-"نسبت به کاربرد دروسم بیشتر بدگمان شده ام.",
-"به طور موثری میتوانم مشکلاتی را که در فعالیت های مربوط به تحصیلم بوجود می‌آید را حل کنم.",
-"معتقدم که مشارکت موثری در کلاس ها دارم.",
-"به عقیده خودم دانشجوی خوبی هستم.",
-"وقتی به اهداف تحصیلی ام می‌رسم احساس برانگیختگی میکنم.",
-"موارد جالب زیادی را در جریان تحصیل یاد گرفته‌ام.",
-"در طول کلاس اطمینان دارم که در انجام کارها مؤثر هستم."
-];
-
-/* ---------- OPTIONS ---------- */
-const options = [
-"هرگز",
-"خیلی",
-"نسبتا کم",
-"گاهی",
-"نسبتا زیاد",
-"بیشتر",
-"همیشه"
-];
-
-let step = -1;
-let answers = {};
-const app = document.getElementById("app");
-
-/* ---------- RENDER ---------- */
-function render(){
-
-  if(step === -1){
-    app.innerHTML = `
-      <p style="white-space:pre-line;line-height:2">${introText}</p>
-      <button class="btn" onclick="start()">شروع</button>
-    `;
-    return;
-  }
-
-  if(step === 0){
-    app.innerHTML = `
-      <h3>اطلاعات فردی</h3>
-
-      <label>سن:
-        <input id="age" type="number">
-      </label>
-
-      <br><br>
-
-      <label><input type="radio" name="g" value="زن"> زن</label>
-      <label><input type="radio" name="g" value="مرد"> مرد</label>
-
-      <br>
-      <button class="btn" onclick="startSurvey()">ادامه</button>
-    `;
-    return;
-  }
-
-  const q = questions[step-1];
-
-  app.innerHTML = `
-    <h3>سوال ${step} از ${questions.length}</h3>
-    <p>${q}</p>
-
-    ${options.map(o => `
-      <label class="option">
-        <input type="radio" name="ans" value="${o}">
-        ${o}
-      </label>
-    `).join('')}
-
-    <button class="btn" onclick="next()">بعدی</button>
-  `;
-}
-
-/* ---------- FLOW ---------- */
-function start(){
-  step = 0;
-  render();
-}
-
-function startSurvey(){
-
-  const g = document.querySelector('input[name="g"]:checked');
-
-  if(!g){
-    alert("جنسیت را انتخاب کنید");
-    return;
-  }
-
-  answers.age = document.getElementById("age").value;
-  answers.gender = g.value;
-
-  step = 1;
-  render();
-}
-
-function next(){
-
-  const a = document.querySelector('input[name="ans"]:checked');
-
-  if(!a){
-    alert("یک گزینه انتخاب کنید");
-    return;
-  }
-
-  answers["q"+step] = a.value;
-
-  if(step < questions.length){
-    step++;
-    render();
-  }else{
-    finish();
-  }
-}
-
-/* ---------- SEND TO SHEET ---------- */
-function finish(){
-
-  fetch(GOOGLE_SCRIPT_URL,{
-    method:"POST",
-    body:JSON.stringify({
-      age:answers.age,
-      gender:answers.gender,
-      answers:questions.map((_,i)=>answers["q"+(i+1)])
-    })
-  });
-
-  app.innerHTML = `
-    <h2>🎉 پایان پرسشنامه</h2>
-    <p>پاسخ شما ثبت شد</p>
-  `;
-}
-
-render();
-
 </script>
+
 </body>
 </html>
